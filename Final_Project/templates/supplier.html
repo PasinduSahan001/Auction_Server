@@ -1,0 +1,17 @@
+{% extends 'layout.html' %} {% block content %}
+<h1> supplier </h1>
+
+<form action="/supplier" method="POST">
+    <input type="hidden" name="User_ID" value="{{User_ID}}">
+    <h5> image_link:- <input type="text" placeholder="Image" name="Image"> </h5>
+    <h5> Title: <input type="text" placeholder="Title" name="Title"> </h5>
+    <h5> Category: <input type="text" placeholder="Category" name="Category"> </h5>
+    <h5> Base_Price: <input type="text" placeholder="Base_Price" name="Base_Price"> </h5>
+    <h5> Expiry_Date: <input type="date" placeholder="Expiry_Date" name="Expiry_Date"> </h5>
+    <h5> Details: <input type="text" placeholder="Details" name="Details"> </h5>
+    <h5> Status: <input type="text" placeholder="Status" name="Status"> </h5>
+    <button type="submit" value="New_Item" name="New_Item"> upload </button>
+    <button type="reset"> reset </button>
+</form>
+ 
+{% endblock content %}

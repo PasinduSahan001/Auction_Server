@@ -1,0 +1,196 @@
+{% extends 'layout.html' %} {% block content %}
+<link href='https://fonts.googleapis.com/css?family=Happy Monkey' rel='stylesheet'>
+<style>
+   body {
+   background-color: #ffffff;
+   font-family: Happy Monkey;
+   }
+   .container {
+   padding-left: auto;
+   padding-right: auto;
+   }
+   .wrapper {
+   justify-content: center;
+   align-items: center
+   }
+   .card {
+   height: 420px;
+   width: 320px;
+   background-color: #242424;
+   border-radius: 10px;
+   overflow: hidden;
+   cursor: pointer;
+   text-align: center !important
+   }
+   .card::before {
+   width: 100%;
+   height: 100%;
+   content: "";
+   top: -50%;
+   background-color: #2c2b2b;
+   transform: skewY(345deg);
+   transition: 1s ease-in
+   }
+   .card:hover::before {
+   top: -70%;
+   transform: skewY(390deg)
+   }
+   .card .image {
+   position: relative;
+   width: 100%;
+   display: inline;
+   justify-content: center;
+   align-items: center
+   }
+   .card .image img {
+   max-width: 100%;
+   transition: 1s ease-in
+   }
+   .card:hover .image img {
+   height: 150;
+   width: 90%
+   }
+   .about-product {
+   position: sticky;
+   color: #fff;
+   bottom: -50px !important;
+   text-align: center;
+   left: 20%;
+   transition: 1s ease-in
+   }
+   .card:hover .about-product {
+   bottom: 20px !important
+   }
+   .buy-now {
+   color: #fff;
+   background-color: #ef5350 !important;
+   border-color: #ef5350 !important;
+   width: 160px;
+   margin-top: 20px
+   }
+   .buy-now:focus {
+   box-shadow: none
+   }
+   .buy-now:hover {
+   color: #fff;
+   background-color: #e84040 !important;
+   border-color: #e84040 !important
+   }
+   ul#countdown li {
+   display: inline;
+   font-size: large;
+   text-align: center;
+   }
+   ol,
+   ul {
+   padding: 0rem !important;
+   }
+</style>
+<body>
+   <div class="container">
+      <div class="my-5">
+         <div id="products">
+            <div class="row">
+               {%for item in data%}
+               <div class="col-lg-6 col-xl-3 col-md-6 mt-2">
+                  <div class="card d-flex flex-column align-items-center shadow-sm bg-white">
+                     <div class="img_wraper wrapper">
+                        <div class="card text-center">
+                           <div class="image "> <img src="{{item[1]}}" alt="" class="card-img-top img-fluid  mx-auto d-block" style="max-width: 20rem; max-height: 20rem;"> </div>
+                           <div class="about-product text-center">
+                              <h4>{{item[3]}}</h4>
+                              <form method="POST" action="/">
+                                 <input type="hidden" name="Item_ID" value="{{item[0]}}">
+                                 <input type="hidden" name="Item_Category" value="{{item[3]}}">
+                                 <h3> <button type="submit" class="btn btn-link link-light" value="Item" name="Item"> <b>   {{item[2]}} </b> </button> </h3>
+                              </form>
+                              <h4>Rs:{{item[5]}} </h4>
+                              <h4></h4>
+                              <h4></h4>
+                              <small class="text-muted">
+                                 {% if item[4] == "Available" %}
+                                 <ul data-countdown='{{item[6]}}' id="countdown">
+                                    <li data-days="00"></li>
+                                    days
+                                    <li data-hours="00"></li>
+                                    <li data-minuts="00"></li>
+                                    <li data-seconds="00"></li>
+                                 </ul>
+                                 {% endif %}
+                                 {% if item[4] != "Available" %}
+                                 <h5 class="text-danger"> {{item[4]}}</h5>
+                                 {% endif %}
+                              </small>
+                              <small> Details </small>
+                              <p> {{item[7]}}</p>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               {% endfor%}
+            </div>
+         </div>
+      </div>
+   </div>
+</body>
+<footer class="flex-shrink-0 py-4 bg-dark text-white-50">
+   <div class="container text-center">
+      <small>Copyright &copy; 2022 Pasindu Sahan Rathnayaka</small>
+   </div>
+</footer>
+<script>
+   $('[data-countdown]').each(function() {
+       var $deadline = new Date($(this).data('countdown')).getTime();
+   
+       var $dataDays = $(this).children('[data-days]');
+       var $dataHours = $(this).children('[data-hours]');
+       var $dataMinuts = $(this).children('[data-minuts]');
+       var $dataSeconds = $(this).children('[data-seconds]');
+   
+       var x = setInterval(function() {
+   
+           var now = new Date().getTime();
+           var t = $deadline - now;
+   
+           var days = Math.floor(t / (1000 * 60 * 60 * 24));
+           var hours = Math.floor(t % (1000 * 60 * 60 * 24) / (1000 * 60 * 60));
+           var minuts = Math.floor(t % (1000 * 60 * 60) / (1000 * 60));
+           var seconds = Math.floor(t % (1000 * 60) / (1000));
+   
+           if (days < 10) {
+               days = '0' + days;
+           }
+   
+           if (hours < 10) {
+               hours = '0' + hours;
+           }
+   
+           if (minuts < 10) {
+               minuts = '0' + minuts;
+           }
+   
+           if (seconds < 10) {
+               seconds = '0' + seconds;
+           }
+   
+           $dataDays.html(days);
+           $dataHours.html(hours);
+           $dataMinuts.html(minuts);
+           $dataSeconds.html(seconds);
+   
+   
+           if (t <= 0) {
+               clearInterval(x);
+   
+               $dataDays.html('00');
+               $dataHours.html('00');
+               $dataMinuts.html('00');
+               $dataSeconds.html('00');
+   
+           }
+   
+       }, 1000);
+   })
+</script>
+{% endblock content %}

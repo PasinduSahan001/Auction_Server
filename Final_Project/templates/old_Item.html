@@ -1,0 +1,253 @@
+<style>
+    ul#countdown li {
+        display: inline;
+        font-size: large;
+        text-align: center;
+    }
+    
+    ol,
+    ul {
+        padding: 0rem !important;
+    }
+    
+    .btn {
+        padding-left: 10px;
+        padding-right: 10px;
+        margin-bottom: 10px;
+        margin-top: 0px;
+        margin-left: 10px;
+        border-radius: 10px;
+        background: rgb(0, 168, 255);
+        background: linear-gradient(90deg, rgba(0, 168, 255, 0.804359243697479) 0%, rgba(0, 45, 175, 0.8379726890756303) 50%, rgba(0, 78, 255, 0.8883928571428571) 100%);
+        font-size: 15px;
+    }
+    
+    .btn1 {
+        padding-left: 32px;
+    }
+    
+    .input [type="number"] {
+        padding-left: 10px;
+        padding-right: 10px;
+        margin-bottom: 10px;
+        margin-top: 0px;
+        margin-left: 10px;
+        border-radius: 10px;
+        background: rgb(0, 168, 255);
+        background: linear-gradient(90deg, rgba(0, 168, 255, 0.804359243697479) 0%, rgba(0, 45, 175, 0.8379726890756303) 50%, rgba(0, 78, 255, 0.8883928571428571) 100%);
+        font-size: 15px;
+    }
+    
+    .view,
+    body,
+    html {
+        height: 100%
+    }
+    
+    .carousel {
+        height: 50%
+    }
+    
+    .carousel .carousel-inner,
+    .carousel .carousel-inner .active,
+    .carousel .carousel-inner .carousel-item {
+        height: 100%
+    }
+    
+    @media (max-width:776px) {
+        .carousel {
+            height: 100%
+        }
+    }
+    
+    .page-footer {
+        background: rgb(0, 168, 255);
+        background: linear-gradient(90deg, rgba(0, 168, 255, 0.804359243697479) 0%, rgba(0, 45, 175, 0.8379726890756303) 50%, rgba(0, 78, 255, 0.8883928571428571) 100%);
+    }
+    
+    .md-form {
+        padding-top: 10px;
+        border-radius: 11px;
+        text-align: center;
+    }
+    
+    .md-textarea {
+        border-radius: 11px;
+        padding-top: 10px;
+    }
+    
+    .accordion {
+        text-align: center;
+        padding-top: 20px;
+    }
+    
+    .btn-group-vertical {
+        margin-top: 10px;
+        margin-left: 50px;
+        padding-top: 10px;
+    }
+</style>
+
+{% extends 'layout.html' %} {% block content %}
+<!-- {% for details in data %}
+<p> {{details[1]}} </p>
+{% endfor%} -->
+
+<body>
+    <main class="mt-5 pt-4">
+        <div class="container dark-grey-text mt-5">
+            <div class="row wow fadeIn">
+                <div class="col-lg-4 col-md-12 mb-4" class="img-fluid">
+                    <img src="{{Item_Image}}" class="img-fluid" alt="">
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="p-4">
+                        <div class="mb-3">
+                            <p class="lead">
+                                <p>
+                                    <h3> <b>
+       {{Item_Title}}
+    </h3>
+    </p></b>
+                                        <p> Rs: {{Item_Base_Price}} </p>
+                                        {{Item_Expiry_Date}}
+                                </p>
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="mb-0">
+                                            Description {{Item_Status}}
+                                        </h5>
+                                    </div>
+                                    {{Item_Details}}
+                                </div>
+                                <h4> Currently Max Bid = Rs:{{Max_Bid}} </h4>
+                                <div class="btn-group-vertical">
+                                    <form action="/" method="POST" class="d-flex justify-content-left">
+                                        {% if Max_Bid == None%}
+                                        <input type="number" class="form-control" style="width: 100px" name="Bid_Price" min="{{Item_Base_Price}}"> {%endif%} {% if Max_Bid != None%}
+                                        <input type="number" class="form-control" style="width: 100px" name="Bid_Price" min="{{Max_Bid}}" required> {%endif%}
+                                        <input type="hidden" name="Item_ID" value="{{Item_ID}}">
+                                        <input type="hidden" name="User_ID" value="{{User_ID}}">
+                                        <input type="hidden" name="Time_Extended" value="{{Time_Extended}}">
+                                        <input type="hidden" name="Expiry_Date" value="{{Item_Expiry_Date}}"> {% if user_data != None and Item_Status == "Available"%}
+                                        <button class="btn btn-primary" type="submit" value="Item_Bid" name="Item_Bid">Bid Now</button> {%endif%} {% if user_data == None or Item_Status != "Available" %}
+                                        <button class="btn btn-primary" disabled>Bid Now  </button> {%endif%}
+                                    </form>
+
+                                    <small class="text-muted">
+                                        <ul class="list-group list-group-horizontal" data-countdown="{{Item_Expiry_Date}}">
+                                            <li class="list-group-item" data-days="00"></li>
+                                            <li class="list-group-item" data-hours="00"></li>
+                                            <li class="list-group-item" data-minuts="00"></li>
+                                            <li class="list-group-item" data-seconds="00"></li>
+                                        </ul>
+                                    <ul class="list-group list-group-horizontal">
+                                        <li class="list-group-item" ><small> DD </small> </li>
+                                    <li class="list-group-item"><small> HH </small> </li>
+                                    <li class="list-group-item"><small> MM </small> </li>
+                                    <li class="list-group-item"><small> SS </small> </li>
+                                    </ul>
+                                    </small>
+                                </div>
+                                <div class="accordion md-accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
+                                    <div class="card">
+                                        <div class="card-header" role="tab" id="headingThree3">
+                                            <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" href="#collapseThree3" aria-expanded="false" aria-controls="collapseThree3">
+                                                <h5 class="mb-0">
+                                                    Additional Information<i class="fas fa-angle-down rotate-icon"></i>
+                                                </h5>
+                                            </a>
+                                        </div>
+                                        <div id="collapseThree3" class="collapse" role="tabpanel" aria-labelledby="headingThree3" data-parent="#accordionEx">
+                                            <div class="card-body">
+                                                <div class="row d-flex justify-content-center wow fadeIn">
+                                                    <div class="col-md-6 text-center">
+                                                        <h4 class="my-4 h4"></h4>
+                                                        <p>
+                                                            <h4> වදයක් නොවී google එකේ ගහල බලපන් බන්🥺🥺🥺🥺. ඔරිජිනල් බඩු වෙනසක් නෑ😇😇😇 </h4>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="row wow fadeIn">
+                                                    <div class="col-lg-4 col-md-12 mb-4">
+                                                        <img src="https://warchamp.sirv.com/Images/Apple-iPhone-12-PNG-Image-HD.png" class="img-fluid" alt="">
+                                                        <p style="text-align: center" ;> phone එකේ magnet එකක් තියෙනව. ඇනයක් බිම වැටුනහම හොයාගන්න වගේ වටිනව. වෙන වැඩැක් නම් නෑ ඉතින්. </p>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-6 mb-4">
+                                                        <img src="https://warchamp.sirv.com/Images/iPhone-12-PNG-Download-Image.png" class="img-fluid" alt="">
+                                                        <p style="text-align: center" ;> කැමරාවකුත් තියෙනව. උපන් කැත අරින්න නම් බැහැ. ඒ option එක ඕනෙ නම් iphone 13 ultra pro max no display version එක ගන්න</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="flex-shrink-0 py-4 bg-dark text-white-50 fixed-bottom">
+        <div class="container text-center">
+            <small>Copyright &copy; 2022 Pasindu Sahan Rathnayaka</small>
+        </div>
+    </footer>
+
+    <script>
+        $('[data-countdown]').each(function() {
+            var $deadline = new Date($(this).data('countdown')).getTime();
+
+            var $dataDays = $(this).children('[data-days]');
+            var $dataHours = $(this).children('[data-hours]');
+            var $dataMinuts = $(this).children('[data-minuts]');
+            var $dataSeconds = $(this).children('[data-seconds]');
+
+            var x = setInterval(function() {
+
+                var now = new Date().getTime();
+                var t = $deadline - now;
+
+                var days = Math.floor(t / (1000 * 60 * 60 * 24));
+                var hours = Math.floor(t % (1000 * 60 * 60 * 24) / (1000 * 60 * 60));
+                var minuts = Math.floor(t % (1000 * 60 * 60) / (1000 * 60));
+                var seconds = Math.floor(t % (1000 * 60) / (1000));
+
+                if (days < 10) {
+                    days = '0' + days;
+                }
+
+                if (hours < 10) {
+                    hours = '0' + hours;
+                }
+
+                if (minuts < 10) {
+                    minuts = '0' + minuts;
+                }
+
+                if (seconds < 10) {
+                    seconds = '0' + seconds;
+                }
+
+                $dataDays.html(days);
+                $dataHours.html(hours);
+                $dataMinuts.html(minuts);
+                $dataSeconds.html(seconds);
+
+
+                if (t <= 0) {
+                    clearInterval(x);
+
+                    $dataDays.html('00');
+                    $dataHours.html('00');
+                    $dataMinuts.html('00');
+                    $dataSeconds.html('00');
+
+                }
+
+            }, 1000);
+        })
+    </script>
+</body>
+{% endblock content %}

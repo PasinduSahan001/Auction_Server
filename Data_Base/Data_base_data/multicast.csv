@@ -1,0 +1,14 @@
+multicast_id,user_id,broadcast_IP
+1,1,224.0.0.0
+2,2,NULL
+3,3,NULL
+4,4,NULL
+5,5,NULL
+6,6,224.0.0.2
+7,7,NULL
+12,12,224.0.0.3
+13,13,NULL
+14,17,NULL
+15,18,NULL
+16,19,NULL
+17,20,NULL

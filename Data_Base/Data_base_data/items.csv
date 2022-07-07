@@ -1,0 +1,15 @@
+item_id,item_owner_id,item_image_link,item_title,item_category,item_base_price,item_expiry_date,item_main_details,item_details,item_buyer,item_sold_price,item_status,time_extended,priority
+73,1,static\image\01.png,"Ancient House",Residential,690000,"2022-01-15 15:46:35","Old Is Gold","Needs to be maintained",6,690002,Sold,FALSE,Special
+74,1,static\image\02.png,"Green House",Residential,6900000,"2022-01-28 00:00:00","3 Rooms And 1 Kitchen","If you like to enjoy your life. This is the right place for it. ",6,6900017,Sold,FALSE,Normal
+75,1,static\image\03.png,"White House",Residential,6200000,"2022-01-29 00:00:00","2 Rooms And 1 Kitchen","If you want to live your life happily, This is the right place for it.",1,NULL,Expired,FALSE,Normal
+76,1,static\image\04.png,"White House_02",Residential,6900000,"2022-01-30 00:00:00","3 Rooms And 1 Kitchen","If you want to live your life happily, This is the right place for it.",NULL,NULL,Available,FALSE,Normal
+77,1,static\image\07.png,"Natural Land","Raw Land",1900000,"2022-01-31 00:00:00","Natural Land","This is a suitable landscape for making a hotel.",NULL,NULL,Available,FALSE,Normal
+78,1,static\image\08.png,"Krajobraz Land","Raw Land",3500000,"2022-02-01 00:00:00","Land With Beautiful Sunrise","This is suitable land to build a farm.",NULL,NULL,Available,FALSE,Normal
+79,6,static\image\09.png,"Oetscher Land","Raw Land",6900000,"2022-02-02 00:00:00","Natural Land","This is suitable land to build a hotel.",NULL,NULL,Available,FALSE,Normal
+80,6,static\image\10.png,"Romanian Land","Raw Land",10000000,"2022-02-03 00:00:00","Natural Land","Natural Land With beautiful Lanscape",NULL,NULL,Available,FALSE,Normal
+81,6,static\image\11.png,"Horror House",Residential,100000,"2022-10-31 18:50:43","Holman Godaai","Include Mohini And Mahasona, ft",NULL,NULL,Available,FALSE,Normal
+82,6,static\image\12.png,"Tea Factory",Commercial,4000000000,"2022-01-15 19:00:22","ඩොලර් උල්පත","ඩොලර් ලංකාවට ගේන සුපිරිම ක්‍රමය. ගන්න කෙනා තමයි හොදටම කරන්නෙ.",NULL,NULL,Expired,FALSE,Special
+83,1,static\image\13.png,Land_Testing_01,"Raw Land",1000000,"2022-02-04 00:00:00","Natural Landscape","If you want to live your life happily, This is the right place for it.",NULL,NULL,Available,FALSE,Normal
+88,1,static\image\14.png,house,Residential,690000,"2022-01-30 00:00:00","3 Rooms And 1 Kitchen","Well maintained ",NULL,NULL,Available,FALSE,Normal
+89,1,static\image\15.png,"House 01",Residential,320000,"2022-01-27 21:09:52","4 Rooms And 1 Kitchen","Well maintained ",NULL,NULL,Expired,FALSE,Special
+90,1,static\image\14.png,"House 03",Residential,100000,"2022-01-27 03:26:49","4 Rooms And 1 Kitchen","Well maintained ",NULL,NULL,Expired,FALSE,Special

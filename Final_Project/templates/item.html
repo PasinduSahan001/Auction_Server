@@ -1,0 +1,162 @@
+{% extends 'layout.html' %} {% block content %}
+<style>
+   .btn {
+   margin-left: 10;
+   }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<body>
+   <section class="py-5">
+      <div class="container px-4 px-lg-5 my-5">
+         <div class="row gx-4 gx-lg-5 align-items-center">
+            <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{{Item_Image}}" alt="..." /></div>
+            <div class="col-md-6">
+               <h5>
+                  <div class=" mb-1" style="font-family: cursive">{{Item_Category}}</div>
+               </h5>
+               <h1 class="display-5 fw-bolder" style="font-family: cursive">{{Item_Title}}</h1>
+               <div class="fs-5 mb-3">
+                  <span style="font-family: cursive">  Base Price Rs: {{Item_Base_Price}}</span>
+               </div>
+               <div class="fs-5 mb-3">
+                  {% if Item_Status == "Available"%}
+                  <h4><span class="badge bg-primary" >{{Item_Status}}</span></h4>
+                  {%endif%}
+                  {% if Item_Status != "Available"%}
+                  <h4><span class="badge bg-danger">{{Item_Status}}</span></h4>
+                  {%endif%}
+               </div>
+               <p class="lead" style="font-family: cursive"> {{Item_Main_Details}} </p>
+               <p class="lead" style="font-family: cursive"> {{Item_Details}} </p>
+               {% if Item_Status == "Available"%}
+               <p class="lead" style="font-family: cursive"> Highest bid = Rs:{{Max_Bid}} </p>
+               {%endif%}
+               {% if Item_Status == "Sold"%}
+               <p class="lead" style="font-family: cursive"> Sold Price = Rs:{{Max_Bid}} </p>
+               {%endif%}
+               <div class="row">
+                  <div class="col-2">
+                  </div>
+                  <div class="col-8">
+                     <div class="btn-group-vertical">
+                        <form action="/" method="POST" class="d-flex justify-content-left">
+                           <input type="hidden" name="Item_ID" value="{{Item_ID}}">
+                           <input type="hidden" name="User_ID" value="{{User_ID}}">
+                           <input type="hidden" name="Time_Extended" value="{{Time_Extended}}">
+                           <input type="hidden" name="Expiry_Date" value="{{Item_Expiry_Date}}">
+                           {% if user_data != None and Item_Status == "Available"%}
+                           {% if Max_Bid == None%}
+                           <input type="number" class="form-control" style="width: 120px" name="Bid_Price" min="{{Item_Base_Price+0.1}}">
+                           {%endif%}
+                           {% if Max_Bid != None%}
+                           <input type="number" class="form-control" style="width: 120px" name="Bid_Price" min="{{Max_Bid+0.1}}" required>
+                           {%endif%}
+                           <button class="btn btn-primary" type="submit" value="Item_Bid" name="Item_Bid">Bid Now</button>
+                           {%endif%}
+                           {% if user_data == None or Item_Status != "Available" %}
+                           {%endif%}
+                        </form>
+                     </div>
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col-2">
+                  </div>
+                  <div class="col-8 mt-2">
+                     <div class="btn-group-vertical">
+                        <form action="/" method="POST" class="d-flex justify-content-left">
+                           <input type="hidden" name="Item_ID" value="{{Item_ID}}">
+                           <input type="hidden" name="User_ID" value="{{User_ID}}">
+                           {% if user_data != None and Item_Status == "Available"%}
+                           <button class="btn btn-danger" type="submit" value="Item_Sub" name="Item_Sub">Subscribe</button>
+                           {%endif%}
+                           {% if user_data == None or Item_Status != "Available" %}
+                           {%endif%}
+                        </form>
+                     </div>
+                  </div>
+               </div>
+               <di3 class="row mt-3">
+               {% if user_data == None and Item_Status == "Available"%}
+               <div class="alert alert-warning" role="alert">
+                  Please login to add bid
+               </div>
+               {%endif%}
+               {% if Item_Status == "Available"%}
+               <di3 class="row mt-3">
+               <h4>
+                  <p id="demo"> Bids End in </p>
+               </h4>
+            </div>
+            {%endif%}
+         </div>
+      </div>
+      </div>
+      </div>
+   </section>
+   <section class="py-5 bg-light">
+      <div class="container px-4 px-lg-5 mt-5">
+         <h2 class="fw-bolder mb-4">Related products</h2>
+         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            {% for product in Related_Products_string %}
+            <div class="col mb-5">
+               <div class="card h-100 shadow-lg bg-white rounded">
+                  <img class="card-img-top pt-1" src="{{product[1]}}" alt="..." />
+                  <div class="card-body p-4">
+                     <div class="text-center">
+                        <h5 class="fw-bolder">{{product[2]}}</h5>
+                        Base_Price: {{product[3]}}
+                     </div>
+                  </div>
+                  <div class="card-footer p-4 pt-0 border-top-0 bg-transparent ">
+                     <form method="POST" action="/">
+                        <input type="hidden" name="Item_ID" value="{{product[0]}}">
+                        <input type="hidden" name="Item_Category" value="{{product[4]}}">
+                        <div class="text-center"><button class="btn btn-outline-dark mt-auto" type="submit" value="Item" name="Item"> View item </button></div>
+                     </form>
+                  </div>
+               </div>
+            </div>
+            {%endfor%}
+         </div>
+         <script>
+            function myFunct() {
+                document.getElementById("GFG").submit();
+            }
+         </script>
+      </div>
+   </section>
+</body>
+<footer class="flex-shrink-0 py-4 bg-dark text-white-50 fixed-bottom">
+   <div class="container text-center">
+      <small>Copyright &copy; 2022 Pasindu Sahan Rathnayaka</small>
+   </div>
+</footer>
+
+<script>
+   var countDownDate = new Date("{{Item_Expiry_Date}}").getTime();
+   
+   var x = setInterval(function() {
+   
+       var now = new Date().getTime();
+   
+       var distance = countDownDate - now;
+   
+       var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+       var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+       var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+       var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+   
+       document.getElementById("demo").innerHTML = days + "d " + hours + "h " +
+           minutes + "m " + seconds + "s ";
+   
+       if (distance < 0) {
+           clearInterval(x);
+           document.getElementById("demo").innerHTML = "EXPIRED";
+       }
+   }, 1000);
+</script>
+
+{% endblock content %}

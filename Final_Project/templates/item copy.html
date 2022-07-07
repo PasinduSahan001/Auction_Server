@@ -1,0 +1,197 @@
+<style>
+    ul#countdown li {
+        display: inline;
+        font-size: large;
+        text-align: center;
+    }
+    
+    ol,
+    ul {
+        padding: 0rem !important;
+    }
+    
+    .btn {
+        padding-left: 10px;
+        padding-right: 10px;
+        margin-bottom: 10px;
+        margin-top: 0px;
+        margin-left: 10px;
+        border-radius: 10px;
+        background: rgb(0, 168, 255);
+        background: linear-gradient(90deg, rgba(0, 168, 255, 0.804359243697479) 0%, rgba(0, 45, 175, 0.8379726890756303) 50%, rgba(0, 78, 255, 0.8883928571428571) 100%);
+        font-size: 15px;
+    }
+    
+    .btn1 {
+        padding-left: 32px;
+    }
+    
+    .input [type="number"] {
+        padding-left: 10px;
+        padding-right: 10px;
+        margin-bottom: 10px;
+        margin-top: 0px;
+        margin-left: 10px;
+        border-radius: 10px;
+        background: rgb(0, 168, 255);
+        background: linear-gradient(90deg, rgba(0, 168, 255, 0.804359243697479) 0%, rgba(0, 45, 175, 0.8379726890756303) 50%, rgba(0, 78, 255, 0.8883928571428571) 100%);
+        font-size: 15px;
+    }
+    
+    .view,
+    body,
+    html {
+        height: 100%
+    }
+    
+    .carousel {
+        height: 50%
+    }
+    
+    .carousel .carousel-inner,
+    .carousel .carousel-inner .active,
+    .carousel .carousel-inner .carousel-item {
+        height: 100%
+    }
+    
+    @media (max-width:776px) {
+        .carousel {
+            height: 100%
+        }
+    }
+    
+    .page-footer {
+        background: rgb(0, 168, 255);
+        background: linear-gradient(90deg, rgba(0, 168, 255, 0.804359243697479) 0%, rgba(0, 45, 175, 0.8379726890756303) 50%, rgba(0, 78, 255, 0.8883928571428571) 100%);
+    }
+    
+    .md-form {
+        padding-top: 10px;
+        border-radius: 11px;
+        text-align: center;
+    }
+    
+    .md-textarea {
+        border-radius: 11px;
+        padding-top: 10px;
+    }
+    
+    .accordion {
+        text-align: center;
+        padding-top: 20px;
+    }
+    
+    .btn-group-vertical {
+        margin-top: 10px;
+        margin-left: 50px;
+        padding-top: 10px;
+    }
+    
+    .card-body {
+        text-align: left !important;
+    }
+</style>
+{% extends 'layout.html' %} {% block content %}
+<!-- {% for details in data %}
+    <p> {{details[1]}} </p>
+    {% endfor%} -->
+
+<body>
+    <main class="mt-1 pt-1">
+        <div class="container dark-grey-text mt-5">
+            <div class="row wow fadeIn">
+                <div class="col-lg-4 col-md-12 mb-4" class="img-fluid">
+                    <img src="{{Item_Image}}" class="img-fluid" alt="">
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="p-4">
+                            <div class="mb-3">
+                                <div class="card-header">
+                                    <h4> <b>  {{Item_Title}} </b> </h4>
+                                </div>
+                                <div class="card-body text-left">
+                                    <div class="row">
+                                        <p class="text-left"> {{Item_Status}} </p>
+                                    </div> biders count:
+                                    <div class="row">
+                                        <p class="">
+                                            <h5> Base_Price Rs: {{Item_Base_Price}} </h5>
+                                        </p>
+                                    </div>
+                                    <div class="row">
+                                        <p class="lead">
+                                            <h5> Details: {{Item_Details}} </h5>
+                                        </p>
+                                    </div>
+                                    <div class="row">
+                                        <p class="lead">
+                                            <h5> Currently Max Bid = Rs:{{Max_Bid}} </h5>
+                                        </p>
+                                    </div>
+                                    <div class="row">
+                                        <div class="btn-group-vertical">
+                                            <form action="/" method="POST" class="d-flex justify-content-left">
+                                                {% if Max_Bid == None%}
+                                                <input type="number" class="form-control" style="width: 100px" name="Bid_Price" min="{{Item_Base_Price}}"> {%endif%} {% if Max_Bid != None%}
+                                                <input type="number" class="form-control" style="width: 100px" name="Bid_Price" min="{{Max_Bid}}" required> {%endif%}
+                                                <input type="hidden" name="Item_ID" value="{{Item_ID}}">
+                                                <input type="hidden" name="User_ID" value="{{User_ID}}">
+                                                <input type="hidden" name="Time_Extended" value="{{Time_Extended}}">
+                                                <input type="hidden" name="Expiry_Date" value="{{Item_Expiry_Date}}"> {% if user_data != None and Item_Status == "Available"%}
+                                                <button class="btn btn-primary" type="submit" value="Item_Bid" name="Item_Bid">Bid Now</button> {%endif%} {% if user_data == None or Item_Status != "Available" %}
+                                                <button class="btn btn-primary" disabled>Bid Now  </button> {%endif%}
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <h4 class="text-muted">
+                                        <p id="demo"></p>
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="flex-shrink-0 py-4 bg-dark text-white-50 fixed-bottom">
+        <div class="container text-center">
+            <small>Copyright &copy; 2022 Pasindu Sahan Rathnayaka</small>
+        </div>
+    </footer>
+
+    <script>
+        // Set the date we're counting down to
+        var countDownDate = new Date("{{Item_Expiry_Date}}").getTime();
+
+        // Update the count down every 1 second
+        var x = setInterval(function() {
+
+            // Get today's date and time
+            var now = new Date().getTime();
+
+            // Find the distance between now and the count down date
+            var distance = countDownDate - now;
+
+            // Time calculations for days, hours, minutes and seconds
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Display the result in the element with id="demo"
+            document.getElementById("demo").innerHTML = days + "d " + hours + "h " +
+                minutes + "m " + seconds + "s ";
+
+            // If the count down is finished, write some text
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("demo").innerHTML = "EXPIRED";
+            }
+        }, 1000);
+    </script>
+</body>
+{% endblock content %}

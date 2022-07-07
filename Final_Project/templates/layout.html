@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <title>Home</title>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+      <script src="{{ url_for('static', filename='js/notification.js') }}"></script>
+      <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+      <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+      <link href='https://fonts.googleapis.com/css?family=Delius Swash Caps' rel='stylesheet'>
+   </head>
+   <style>
+      body{
+         font-family: Delius Swash Caps;
+      }
+   </style>
+   <body>
+      <div class="nav_bar">
+         <div class="navbar navbar-dark bg-dark navbar-expand-sm fixed-top">
+            <a href="#" class="navbar-brand">Real Estate Auction </a>
+            <button class="navbar-toggler" data-toggle="collapse" data-target="#nav_links"><span class="navbar-toggler-icon"></span> </button>
+            <div class="collapse navbar-collapse justify-content-center" id="nav_links">
+               <ul class="navbar-nav" id="nav_links">
+                  <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
+                  <li class="nav-item"><a href="/about" class="nav-link">About Us</a></li>
+                  <li class="nav-item dropdown">
+                     <a class="nav-link dropdown-toggle" href="#" id="nav_dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Account
+                     </a>
+                     <div class="dropdown-menu" aria-labelledby="nav_dropdown">
+                        {% if user_data == None %}
+                        <a class="dropdown-item" data-toggle="modal" data-target="#login">Log in</a>
+                        <a class="dropdown-item" data-toggle="modal" data-target="#signup">Sign up</a> {%endif%}
+                        {% if user_data != None%}
+                        <form method="POST" action="/">
+                           <!-- <button type="submit" value="Home" name="Home"> Home</button> -->
+                           <input type="hidden" name="channel" value="{{User_ID}}">
+                           <h5 class="card-title"> <button type="submit" class="btn btn-link" name="Dashboard" value="Dashboard"> {{First_Name + " " + Last_Name}}  </button> </h5>
+                        </form>
+                        <div class="dropdown-divider"> data </div>
+                        <a class="dropdown-item" href="/logout">Log out</a>
+                        {%endif%}
+                     </div>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </div>
+      <div class="container">
+      </div>
+      <div class="modal fade" tabindex=-1 role="dialog" id="login">
+         <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title">Log In</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"> 
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body">
+                  <body class="text-center">
+                     <form method="POST" action="/" class="form-signin">
+                        <h1 class="h3 mb-3 font-weight-normal">Log in</h1>
+                        <input type="text" id="email" name="email" value="email" class="form-control" placeholder="Email address" required autofocus>
+                        <br>
+                        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+                        <div class="checkbox mb-3">
+                           <label>
+                           <input type="checkbox" value="remember-me"> Remember me
+                           </label>
+                        </div>
+                        <button class="btn btn-lg btn-primary btn-block" type="submit" value="Log_in" name="Log_in">Log in</button>
+                     </form>
+                  </body>
+               </div>
+               <div class="modal-footer">
+                  <p>Real Estate Auction</p>
+               </div>
+            </div>
+         </div>
+      </div>
+   <div class="modal fade" tabindex=-1 role="dialog" id="signup">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title">Sign Up</h5>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close"> 
+               <span aria-hidden="true">&times;</span>
+               </button>
+            </div>
+            <div class="modal-body">
+               <body class="text-center">
+                  <form action="/" method="POST" class="form-signin">
+                     <h1 class="h3 mb-3 font-weight-normal">Sign Up</h1>
+                     <input type="text" id="First_Name" name="First_Name" class="form-control" placeholder="First Name" required autofocus>
+                     <br>
+                     <input type="text" id="Last_Name" name="Last_Name" class="form-control" placeholder="Last Name" required autofocus>
+                     <br>
+                     <input type="text" id="Phone_Number" name="Phone_Number" class="form-control" placeholder="Phone Number" required autofocus>
+                     <br>
+                     <input type="email" id="Email" name="Email" class="form-control" placeholder="Email address" required autofocus>
+                     <br>
+                     <input type="password" id="Password" name="Password" class="form-control" placeholder="Password" required autofocus>
+                     <br>
+                     <input type="password" id="Password_Check" name="Password_Check" class="form-control" placeholder="Re-enter Password" required autofocus>
+                     <div class="checkbox mb-3">
+                     </div>
+                     <button class="btn btn-lg btn-primary btn-block" type="submit" value="Sign_Up" name="Sign_Up">Sign Up</button>
+                  </form>
+               </body>
+            </div>
+            <div class="modal-footer">
+               <p>Real Estate Auction</p>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div id="dialog-message">
+         <span class="ui-icon ui-icon-circle-check" style="float:left; margin:5% 5% 50px 0;"></span>
+      <div id="successAlert" class="alert alert-success" role="alert" style="display:none;"></div>
+   </div>
+   <div id="errorAlert" class="alert alert-danger" role="alert" style="display:none;"></div>
+   {% for message in get_flashed_messages() %}
+      
+      <div class="alert alert-primary alert-dismissible show mt-5" role="alert">
+         <strong>{{message}}</strong> 
+         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+   {% endfor %}
+   <div class="row mt-3">
+
+   </div>
+   {%block content%} {% endblock %}
+   </body>
+</html>

@@ -1,0 +1,509 @@
+{% extends 'layout.html' %} {% block content %}
+<style>
+   body {
+   color: #1a202c;
+   text-align: left;
+   background-color: #e2e8f0;
+   }
+   .main-body {
+   padding: 15px;
+   }
+   .card {
+   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
+   }
+   .card {
+   position: relative;
+   display: flex;
+   flex-direction: column;
+   min-width: 0;
+   word-wrap: break-word;
+   background-color: #fff;
+   background-clip: border-box;
+   border: 0 solid rgba(0, 0, 0, .125);
+   border-radius: .25rem;
+   }
+   .card-body {
+   flex: 1 1 auto;
+   min-height: 1px;
+   padding: 1rem;
+   }
+   .gutters-sm {
+   margin-right: -8px;
+   margin-left: -8px;
+   }
+   .gutters-sm>.col,
+   .gutters-sm>[class*=col-] {
+   padding-right: 8px;
+   padding-left: 8px;
+   }
+   .mb-3,
+   .my-3 {
+   margin-bottom: 1rem!important;
+   }
+   .bg-gray-300 {
+   background-color: #e2e8f0;
+   }
+   .h-100 {
+   height: 100%!important;
+   }
+   .shadow-none {
+   box-shadow: none!important;
+   }
+</style>
+<div class="container mt-5">
+   <div class="main-body">
+      <div class="row gutters-sm">
+         <div class="col-md-4 mb-3">
+            <div class="card shadow-lg bg-white rounded">
+               <div class="card-body">
+                  <div class="d-flex flex-column align-items-center text-center">
+                     <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
+                     <div class="mt-3">
+                        <h4>{{First_Name + " " + Last_Name}}</h4>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="card mt-5 shadow-lg bg-white rounded">
+               <ul class="list-group list-group-flush">
+                  <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                     <h6 class="mb-0">
+                        Winning Bids
+                     </h6>
+                     <a class="btn btn-info " data-toggle="modal" data-target="#win_bids">View</a>
+                  </li>
+               </ul>
+            </div>
+            <div class="card mt-1 shadow-lg bg-white rounded">
+               <ul class="list-group list-group-flush">
+                  <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                     <h6 class="mb-0">
+                        Subscribed Items
+                     </h6>
+                     <a class="btn btn-info " data-toggle="modal" data-target="#sub_items">View</a>
+                  </li>
+               </ul>
+            </div>
+         </div>
+         <div class="col-md-8">
+            <div class="card mb-3 ms-2 shadow-lg bg-white rounded">
+               <div class="card-body">
+                  <div class="row">
+                     <div class="col-sm-3">
+                        <h6 class="mb-0">First Name</h6>
+                     </div>
+                     <div class="col-sm-9 text-secondary">
+                        {{First_Name}}
+                     </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                     <div class="col-sm-3">
+                        <h6 class="mb-0">Last Name</h6>
+                     </div>
+                     <div class="col-sm-9 text-secondary">
+                        {{Last_Name}}
+                     </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                     <div class="col-sm-3">
+                        <h6 class="mb-0">Email Address</h6>
+                     </div>
+                     <div class="col-sm-9 text-secondary">
+                        {{Email}}
+                     </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                     <div class="col-sm-3">
+                        <h6 class="mb-0">Mobile</h6>
+                     </div>
+                     <div class="col-sm-9 text-secondary">
+                        {{Mobile_Number}}
+                     </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                     <div class="col-sm-3">
+                        <h6 class="mb-0">Address</h6>
+                     </div>
+                     <div class="col-sm-9 text-secondary">
+                        {{Address}}
+                     </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                     <div class="col-sm-12">
+                        <a class="btn btn-info " data-toggle="modal" data-target="#Edit_Profile">Edit</a>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="row gutters-sm">
+         <div class="col-sm-6 mb-3">
+            <div class="card h-100 shadow-lg bg-white rounded">
+               <div class="card-body">
+                  <h6 class="align-items-center mb-3"><i class="material-icons text-info mr-2">Bidding Items</i></h6>
+                  <div class="row">
+                     <div class="col-4 mt-0 mb-2">
+                        <small> Item_Name </small>
+                     </div>
+                     <div class="col-4 mt-0 mb-2">
+                        <small> Base_Price </small>
+                     </div>
+                     <div class="col-4 mt-0 mb-2">
+                        <small> Bid_Price </small>
+                     </div>
+                     <hr>
+                  </div>
+                  {%for item in dashboard_bid_items%}
+                  <div class="row">
+                     <div class="col-4  mb-1">
+                        <small> {{item[0]}} </small>
+                     </div>
+                     <div class="col-4  mb-1">
+                        <small> {{item[1]}} </small>
+                     </div>
+                     <div class="col-4  mb-1">
+                        <small> {{item[2]}} </small>
+                     </div>
+                  </div>
+                  {%endfor%}
+               </div>
+            </div>
+         </div>
+         <div class="col-sm-6 mb-3">
+            <div class="card h-100 shadow-lg bg-white rounded">
+               <div class="card-body">
+                  <h6 class="align-items-center mb-3"><i class="material-icons text-info mr-2">Auction Items</i></h6>
+                  <div class="row">
+                     <div class="col-3  mb-2">
+                        <small> Item_Name </small>
+                     </div>
+                     <div class="col-3  mb-2">
+                        <small> Base_Price </small>
+                     </div>
+                     <div class="col-3  mb-2">
+                        <small>Highest Bid </small>
+                     </div>
+                     <div class="col-3  mb-2">
+                        <small>Status </small>
+                     </div>
+                     <hr>
+                  </div>
+                  {%for item in dashboard_own_items%}
+                  <div class="row">
+                     <div class="col-3 mb-1">
+                        <small> {{item[1]}} </small>
+                     </div>
+                     <div class="col-3  mb-1">
+                        <small> {{item[2]}} </small>
+                     </div>
+                     <div class="col-3  mb-1">
+                        <small> {{item[3][0]}} </small>
+                     </div>
+                     <div class="col-3  mb-1">
+                        <small> {{item[4]}} </small>
+                     </div>
+                  </div>
+                  {%endfor%}
+                  <hr>
+                  <div class="row">
+                     <div class="col-sm-12">
+                        <a class="btn btn-info " data-toggle="modal" data-target="#Add_Item">Add_Items</a>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<div class="modal fade " tabindex=-1 role="dialog" id="Edit_Profile">
+   <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title">Edit Profile</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"> 
+            <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <div class="model-body">
+            <div class="col-12">
+               <div class="card">
+                  <div class="card-body">
+                     <form method="POST" action="/edit_profile">
+                        <div class="row mb-3">
+                           <div class="col-sm-3">
+                              <h6 class="mb-0">First Name</h6>
+                           </div>
+                           <div class="col-sm-9 text-secondary">
+                              <input type="text" class="form-control" name="First_Name" value={{First_Name}}>
+                           </div>
+                        </div>
+                        <div class="row mb-3">
+                           <div class="col-sm-3">
+                              <h6 class="mb-0">Last Name</h6>
+                           </div>
+                           <div class="col-sm-9 text-secondary">
+                              <input type="text" class="form-control" name="Last_Name" value={{Last_Name}}>
+                           </div>
+                        </div>
+                        <div class="row mb-3">
+                           <div class="col-sm-3">
+                              <h6 class="mb-0">Email</h6>
+                           </div>
+                           <div class="col-sm-9 text-secondary">
+                              <input type="email" class="form-control" name="Email" value={{Email}} disabled>
+                           </div>
+                        </div>
+                        <div class="row mb-3">
+                           <div class="col-sm-3">
+                              <h6 class="mb-0">Mobile</h6>
+                           </div>
+                           <div class="col-sm-9 text-secondary">
+                              <input type="text" class="form-control" name="Phone_Number" value={{Mobile_Number}} disabled>
+                           </div>
+                        </div>
+                        <div class="row mb-3">
+                           <div class="col-sm-3">
+                              <h6 class="mb-0">Address</h6>
+                           </div>
+                           <div class="col-sm-9 text-secondary">
+                              <input type="text" class="form-control" name="Address" value="{{Address}}">
+                           </div>
+                        </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="modal-footer">
+         <div class="col text-secondary">
+         <button type="submit" class="btn btn-primary px-4" name="Save_Changes" value="Save_Changes"> Save Changes </button>
+         </div>
+         </div>
+         </form>
+      </div>
+   </div>
+</div>
+<div class="modal fade" tabindex=-1 role="dialog" id="Add_Item">
+   <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title"> Add New Item </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"> 
+            <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <div class="model-body">
+            <div class="col-12">
+               <div class="card">
+                  <div class="card-body">
+                     <form action="/supplier" method="POST">
+                        <input type="hidden" name="User_ID" value="{{User_Id}}">
+                        <div class="row mb-3">
+                           <div class="col-sm-3">
+                              <h6 class="mb-0">Image Location</h6>
+                           </div>
+                           <div class="col-sm-9 text-secondary">
+                              <input type="text" class="form-control" placeholder="" name="Image" required>
+                              <label><small>Image should be in the static folder</small> </label>
+                           </div>
+                        </div>
+                        <div class="row mb-3">
+                           <div class="col-sm-3">
+                              <h6 class="mb-0">Title</h6>
+                           </div>
+                           <div class="col-sm-9 text-secondary">
+                              <input type="text" class="form-control" placeholder="" name="Title" required>
+                              <label><small> The maximum character Limit is 34</small> </label>
+                           </div>
+                        </div>
+                        <div class="row mb-3">
+                           <div class="col-sm-3">
+                              <h6 class="mb-0">Category</h6>
+                           </div>
+                           <div class="col-sm-9 text-secondary">
+                              <input type="text" class="form-control" placeholder="" name="Category" required>
+                              <label><small> Please insert the correct category</small> </label>
+                           </div>
+                        </div>
+                        <div class="row mb-3">
+                           <div class="col-sm-3">
+                              <h6 class="mb-0">Base_Price</h6>
+                           </div>
+                           <div class="col-sm-9 text-secondary">
+                              <input type="text" class="form-control" placeholder="" name="Base_Price" required>
+                              <label><small> Please insert the last price of the item</small> </label>
+                           </div>
+                        </div>
+                        <div class="row mb-3">
+                           <div class="col-sm-3">
+                              <h6 class="mb-0">Expiry_Date</h6>
+                           </div>
+                           <div class="col-sm-9 text-secondary">
+                              <input type="date" class="form-control" placeholder="" name="Expiry_Date" required>
+                              <label><small> Please enter your bid closing date</small> </label>
+                           </div>
+                        </div>
+                        <div class="row mb-3">
+                           <div class="col-sm-3">
+                              <h6 class="mb-0">Main Details</h6>
+                           </div>
+                           <div class="col-sm-9 text-secondary">
+                              <input type="text" class="form-control" placeholder="" name="Main_Details" required>
+                              <label><small> The maximum Character Limit is 34</small> </label>
+                           </div>
+                        </div>
+                        <div class="row mb-3">
+                           <div class="col-sm-3">
+                              <h6 class="mb-0">Details</h6>
+                           </div>
+                           <div class="col-sm-9 text-secondary">
+                              <input type="text" class="form-control" placeholder="" name="Details" required>
+                              <label><small> Please describe your item as short and sweet</small> </label>
+                           </div>
+                        </div>
+                        <hr>
+                        <h4> One day Bid </h4>
+                        <div class="row mb-3">
+                           <div class="col-sm-1"> </div>
+                           <div class="col-sm-10 text-secondary">
+                              <input type="checkbox" id="form-control" class="form-check-input"  name="Special_Time" value="True">
+                              <label> Please confirm this, If you need the one-day bid function. </label>
+                           </div>
+                           <div class="col-sm-1"> </div>
+                        </div>
+                        <div class="row mb-3">
+                           <div class="col-sm-3">
+                              <h6 class="mb-0">Time Duration</h6>
+                           </div>
+                           <div class="col-sm-9 text-secondary">
+                              <input type="number" class="form-control" placeholder="" name="Time" min="1" max="23">
+                              <label>Please enter bidding time duration in hours.  </label>
+                           </div>
+                        </div>
+                  </div>
+                  <div class="modal-footer">
+                  <div class="row">
+                  <div class="col-8">
+                  <button type="submit" value="New_Item" name="New_Item" class="btn btn-primary px-4"> Upload Item </button>
+                  </div>
+                  <div class="col-4">
+                  <button type="reset" class="btn btn-primary px-4"> Reset </button>
+                  </div>
+                  </div>
+                  </form>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<div class="modal fade" tabindex=-1 role="dialog" id="win_bids">
+   <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title">Winning Bids</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"> 
+            <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <div class="model-body">
+            <div class="col-12">
+               <div class="card">
+                  <div class="card-body">
+                     <div class="row">
+                        <div class="col-4  mb-2">
+                           <small> Item_Name </small>
+                        </div>
+                        <div class="col-4  mb-2">
+                           <small> Base_Price </small>
+                        </div>
+                        <div class="col-4  mb-2">
+                           <small>Your Price </small>
+                        </div>
+                        <hr>
+                     </div>
+                     {%for item in dashboard_win_bids%}
+                     <div class="row">
+                        <div class="col-4 mb-1">
+                           <small> {{item[0]}} </small>
+                        </div>
+                        <div class="col-4  mb-1">
+                           <small> {{item[1]}} </small>
+                        </div>
+                        <div class="col-4  mb-1">
+                           <small> {{item[2]}} </small>
+                        </div>
+                     </div>
+                     {%endfor%}
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="modal-footer">
+            <p>Congratulations! Enjoy your items.</p>
+         </div>
+         </form>
+      </div>
+   </div>
+</div>
+<div class="modal fade" tabindex=-1 role="dialog" id="sub_items">
+   <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title">Subscribed Items</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"> 
+            <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <div class="model-body">
+            <div class="col-12">
+               <div class="card">
+                  <div class="card-body">
+                     <div class="row">
+                        <div class="col-6  mb-2">
+                           <small> Item_Name </small>
+                        </div>
+                        <div class="col-6  mb-2">
+                           <small> Base_Price </small>
+                        </div>
+                        <hr>
+                     </div>
+                     {%for item in dashboard_sub_items%}
+                     <div class="row">
+                        <div class="col-6 mb-1">
+                           <small> {{item[1]}} </small>
+                        </div>
+                        <div class="col-6  mb-1">
+                           <small> {{item[2]}} </small>
+                        </div>
+                     </div>
+                     {%endfor%}
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="modal-footer">
+            <p>Stay tuned and win the items</p>
+         </div>
+         </form>
+      </div>
+   </div>
+</div>
+</div>
+</body>
+<div class="mb-5">
+   <br>
+</div>
+<footer class="flex-shrink-0 py-4 bg-dark text-white-50 fixed-bottom">
+   <div class="container text-center">
+      <small>Copyright &copy; 2022 Pasindu Sahan Rathnayaka</small>
+   </div>
+</footer>
+{% endblock content %}
