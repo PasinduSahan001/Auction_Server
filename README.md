@@ -10,7 +10,7 @@
 ### 👥 Group Members
 - [Pasidu Sahan](https://github.com/PasinduSahan001)
 - [Rusitha Thennekoon](https://github.com/Rusitha28)
-- [Thushani Kavindya](https://github.com/yourgithubusername)
+- [R.D.T.Kavindya](https://github.com/thusha88)
 - [Nethma Pathirana](https://github.com/nethmapathirana)
 - [Shamika Konara](https://github.com/yourgithubusername)
 
