@@ -61,6 +61,10 @@ The system is designed for users to easily navigate through available auction it
 
 ![Subscribed Item Screenshot](https://github.com/PasinduSahan001/Auction_Server/blob/beec69116fa8f884b44d7c894f560969bb265140/Resources_ReadME/Subscribed%20Items-min.png)
 
+## Video Demonstration
+
+🎥 For a demonstration of the Auction_Server in action, check out our video on Google Drive: [Video Demonstration](https://drive.google.com/file/d/1oIFouS7JSWieXyycHClXvN4dbrtkBl6N/view?usp=sharing)
+
 
 ## 🙏 Acknowledgements
 A huge thank you to our project advisor and everyone who supported us during the development process! 💖
